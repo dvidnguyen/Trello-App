@@ -6,9 +6,11 @@ import App from './App.jsx'
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
 />
+import CssBaseline from '@mui/material/CssBaseline';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <CssBaseline/>
     <App />
   </StrictMode>,
 )
