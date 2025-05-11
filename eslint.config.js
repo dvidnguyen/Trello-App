@@ -37,6 +37,13 @@ export default [
       'react/display-name': 0, // Từ file mới
       'react-refresh/only-export-components':
         'warn', // Từ file cũ + file mới
+      "no-restricted-imports": 
+      [
+      "error", 
+      {
+        "patterns": [{ "regex": "^@mui/[^/]+$" }]
+      }
+      ],
       'react-hooks/rules-of-hooks': 'error', // Từ file mới
       'react-hooks/exhaustive-deps': 'warn', // Từ file mới
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }], // Kết hợp file cũ và file mới
