@@ -1,14 +1,16 @@
-import { AccessAlarm, ThreeDRotation } from "@mui/icons-material";
-import { Typography } from "@mui/material";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
 import { Button } from "@mui/material";
-import { useColorScheme } from "@mui/material/styles";
+import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
+import { useColorScheme } from "@mui/material/styles";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import theme from "./theme";
+
 function SelectMode() {
   const { mode, setMode } = useColorScheme();
   const handleChange = (event) => {
@@ -18,7 +20,7 @@ function SelectMode() {
 
   return (
     <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="select-mode-dark-light">Age</InputLabel>
+      <InputLabel id="select-mode-dark-light">Mode</InputLabel>
       <Select
         labelId="select-mode-dark-light"
         id="mode-dark-light"
@@ -27,19 +29,19 @@ function SelectMode() {
         onChange={handleChange}
       >
         <MenuItem value="light">
-          <div style={{ display: "flex", alignItems: "center",gap:"7px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
             <LightModeIcon fontSize="small" /> Light
           </div>
         </MenuItem>
         <MenuItem value="dark">
-          <div style={{ display: "flex", alignItems: "center",gap:"7px" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <DarkModeOutlinedIcon fontSize="small" /> Dark
-          </div>
+          </Box>
         </MenuItem>
         <MenuItem value="system">
-          <div style={{ display: "flex", alignItems: "center",gap:"7px" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <SettingsSuggestOutlinedIcon fontSize="small" /> System
-          </div>
+          </Box>
         </MenuItem>
       </Select>
     </FormControl>
@@ -60,19 +62,45 @@ function ModeToggle() {
 
 function App() {
   return (
-    <>
-      <SelectMode />
-      <hr />
-      <ModeToggle />
-      <hr />
-      <AccessAlarm />
-      <ThreeDRotation />
-      <div>Em la dvid nguyen </div>
-      <Typography variant="subtitle2" gutterBottom color="text.secondary">
-        subtitle2. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Quos blanditiis tenetur
-      </Typography>
-    </>
+    <Container
+      disableGutters
+      maxWidth={false}
+      sx={{ height: "100vh", backgroundColor: "primary.main" }}
+    >
+      <Box
+        sx={{
+          backgroundColor: "primary.light",
+          width: "100%",
+          height: (theme) => theme.trello.navBarHeight,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <SelectMode />
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: "primary.dark",
+          width: "100%",
+          height: (theme) => theme.trello.broadBarHeight,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Broad Trello
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: "primary.main",
+          width: "100%",
+          height: (theme) =>`calc(100vh - ${theme.trello.navBarHeight} - ${theme.trello.broadBarHeight})`,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Broad content
+      </Box>
+    </Container>
   );
 }
 
