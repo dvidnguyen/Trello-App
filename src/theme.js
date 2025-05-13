@@ -13,10 +13,7 @@ const theme = extendTheme({
       palette: {
         primary: teal,
         secondary: deepOrange,
-        background: {
-          default: '#f5f5f5',
-          paper: '#ffffff'
-        }
+    
       },
       // spacing: (factor) => `${0.25 * factor}rem`
     },
@@ -24,10 +21,7 @@ const theme = extendTheme({
       palette: {
         primary: cyan,
         secondary: orange,
-        background: {
-          default: '#121212',
-          paper: '#1e1e1e'
-        }
+      
       },
       spacing: (factor) => `${0.25 * factor}rem`
     },
