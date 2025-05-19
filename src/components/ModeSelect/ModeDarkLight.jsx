@@ -25,7 +25,7 @@ const ModeDarkLight = () => {
         onChange={handleChange}
       >
         <MenuItem value="light">
-          <div style={{ display: "flex", alignItems: "center", gap: "7px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 1 }}>
             <LightModeIcon fontSize="small" /> Light
           </div>
         </MenuItem>

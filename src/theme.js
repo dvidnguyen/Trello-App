@@ -1,6 +1,7 @@
 import { deepOrange } from '@mui/material/colors';
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
 import { teal, cyan, orange } from '@mui/material/colors';
+import { BorderColor, Height } from '@mui/icons-material';
 
 // Create a theme instance.
 const theme = extendTheme({
@@ -15,7 +16,7 @@ const theme = extendTheme({
         secondary: deepOrange,
     
       },
-      // spacing: (factor) => `${0.25 * factor}rem`
+      spacing: (factor) => `${0.25 * factor}rem`
     },
     dark: {
       palette: {
@@ -26,7 +27,55 @@ const theme = extendTheme({
       spacing: (factor) => `${0.25 * factor}rem`
     },
   },
-  // ...other properties
+ components: {
+    // Name of the component
+    MuiCssBaseline:{
+      styleOverrides:{
+        body:{
+          '*::-webkit-scrollbar ':{
+            width:'8px',
+            height:'8px'
+          },
+          '*::-webkit-scrollbar-thumb ':{
+            backgroundColor:'#bdc3c7',
+            borderRadius:'4px'
+            
+          },
+          '*::-webkit-scrollbar-thumb:hover ':{
+            backgroundColor:'#7f8c8d'
+          }
+        }
+      }
+    },
+    MuiButton: {
+      styleOverrides: {
+        // Name of the slot
+         root: {
+            textTransform: 'none'
+        },
+       
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        // Name of the slot
+        root: ({theme})=>({
+          color:theme.palette.primary.light,
+          fontSize:'0.975rem',
+          '.MuiOutlinedInput-notchedOutline':{
+            borderColor:theme.palette.primary.light
+          },
+          '&:hover':{
+             borderColor:theme.palette.primary.light
+          },
+          '&:fliedset':{
+            borderWidth:'1px !important'
+          }
+            
+        })
+      },
+    },
+  },
 });
 
 export default theme
