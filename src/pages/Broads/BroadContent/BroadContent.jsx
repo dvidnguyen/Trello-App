@@ -11,6 +11,8 @@ const BroadContent = () => {
             `calc(100vh - ${theme.trello.navBarHeight} - ${theme.trello.broadBarHeight})`,
           display: "flex",
           alignItems: "center",
+          bgcolor: (theme) =>
+            theme.palette.mode === "dark" ? "#34495e" : "#1976d2",
         }}
       >
         Broad content
