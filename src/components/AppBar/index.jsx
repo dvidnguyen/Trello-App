@@ -27,9 +27,9 @@ const AppBar = () => {
           justifyContent: "space-between",
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <AppsIcon sx={{ color: "primary.dark" }} />
-          <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2}}>
             <SvgIcon
               component={trelloIcon}
               inheritViewBox
@@ -55,7 +55,7 @@ const AppBar = () => {
             Create
           </Button>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "5px" }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <TextField
             id="outlined-basic"
             label="Search"
@@ -66,7 +66,7 @@ const AppBar = () => {
           <ModeDarkLight />
           <Tooltip title="Notification">
             <Badge color="secondary" variant="dot" sx={{ cursor: "pointer" }}>
-              <NotificationsIcon />
+              <NotificationsIcon sx={{color:'primay.main'}} />
             </Badge>
           </Tooltip>
           <Tooltip title="Help" sx={{ cursor: "pointer" }}>
