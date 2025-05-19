@@ -32,7 +32,7 @@ const Starred = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{ }}
+        sx={{color:'white' }}
       >
         Template
       </Button>

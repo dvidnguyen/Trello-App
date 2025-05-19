@@ -28,7 +28,7 @@ const Recent = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{}}
+       sx={{color:'white' }}
       >
         Recent
       </Button>

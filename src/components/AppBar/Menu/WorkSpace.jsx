@@ -32,7 +32,7 @@ const WorkSpace = () => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
-        sx={{ }}
+        sx={{color:'white' }}
       >
         Workspace
       </Button>
