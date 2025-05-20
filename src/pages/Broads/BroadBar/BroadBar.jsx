@@ -99,8 +99,11 @@ const BroadBar = () => {
               "& .MuiAvatar-root": {
                 width: "34px",
                 height: "34px",
-                fontSize: 16,
-                border:'none'
+                fontSize: 13,
+                border:'none',
+                color:'white',
+                cursor:'pointer',
+                '&:first-of-type':{bgcolor:'a430de'}
               },
             }}
           >
