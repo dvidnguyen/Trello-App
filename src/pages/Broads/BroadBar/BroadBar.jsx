@@ -1,17 +1,16 @@
-import React from "react";
-import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import VpnLockIcon from "@mui/icons-material/VpnLock";
 import AddToDriveIcon from "@mui/icons-material/AddToDrive";
-import FlashAutoIcon from "@mui/icons-material/FlashAuto";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import FilterListIcon from "@mui/icons-material/FilterList";
+import FlashAutoIcon from "@mui/icons-material/FlashAuto";
 import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
-import Button from "@mui/material/Button";
+import VpnLockIcon from "@mui/icons-material/VpnLock";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Chip from "@mui/material/Chip";
 import Tooltip from "@mui/material/Tooltip";
-import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+import { capitalizeFirstLetter } from "~/utils/formater";
 const Menu_style = {
   color: "white",
   bgcolor: "primary.20",
@@ -24,7 +23,7 @@ const Menu_style = {
     bgcolor: "primary.50",
   },
 };
-const BroadBar = () => {
+const BroadBar = ({ board }) => {
   return (
     <>
       <Box
@@ -46,13 +45,13 @@ const BroadBar = () => {
       >
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <Chip
-            label="DvidNguyen Trello app"
+            label={board?.title}
             sx={Menu_style}
             icon={<DashboardIcon />}
             clickable
           />
           <Chip
-            label="Public/Private Workspace"
+            label={capitalizeFirstLetter(board?.type)}
             sx={Menu_style}
             icon={<VpnLockIcon />}
             clickable
@@ -93,17 +92,16 @@ const BroadBar = () => {
           </Button>
           <AvatarGroup
             max={4}
-            
             sx={{
-              gap:'4px',
+              gap: "4px",
               "& .MuiAvatar-root": {
                 width: "34px",
                 height: "34px",
                 fontSize: 13,
-                border:'none',
-                color:'white',
-                cursor:'pointer',
-                '&:first-of-type':{bgcolor:'a430de'}
+                border: "none",
+                color: "white",
+                cursor: "pointer",
+                "&:first-of-type": { bgcolor: "a430de" },
               },
             }}
           >

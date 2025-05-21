@@ -4,7 +4,7 @@ import Column from "./Column/Column";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { Button } from "@mui/material";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
-const ListColumns = () => {
+const ListColumns = ({ columns }) => {
   return (
     <>
       <Box
@@ -19,11 +19,11 @@ const ListColumns = () => {
         }}
       >
         {/* box comlum 1 */}
-        <Column />
-        <Column />
-        <Column />
-        <Column />
-        <Column />
+        {columns?.map((column) => {
+          return <Column key={column._id} column ={column} />;
+        })}
+        {/* Way 2 ngan hon khi su li logic gi trong map dung {} con kh thi dung ngoac () */}
+        {/* {columns?.map(column => <Column key={column._id} />)} */}
         <Box
           sx={{
             height: "fit-content",
