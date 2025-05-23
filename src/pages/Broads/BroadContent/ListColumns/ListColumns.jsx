@@ -4,9 +4,12 @@ import Column from "./Column/Column";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import { Button } from "@mui/material";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import { SortableContext,horizontalListSortingStrategy } from "@dnd-kit/sortable";
+
 const ListColumns = ({ columns }) => {
   return (
     <>
+    <SortableContext items={columns?.map(c => c._id)} strategy={horizontalListSortingStrategy}>
       <Box
         sx={{
           bgcolor: "inherit",
@@ -20,7 +23,7 @@ const ListColumns = ({ columns }) => {
       >
         {/* box comlum 1 */}
         {columns?.map((column) => {
-          return <Column key={column._id} column ={column} />;
+          return <Column key={column._id} column={column} />;
         })}
         {/* Way 2 ngan hon khi su li logic gi trong map dung {} con kh thi dung ngoac () */}
         {/* {columns?.map(column => <Column key={column._id} />)} */}
@@ -48,6 +51,7 @@ const ListColumns = ({ columns }) => {
           </Button>
         </Box>
       </Box>
+    </SortableContext>
     </>
   );
 };
