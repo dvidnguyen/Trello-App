@@ -21,8 +21,10 @@ import ListCards from "./ListCards/ListCards";
 import { mapOrder } from "~/utils/sort";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { height } from "@mui/system";
+import { Opacity } from "@mui/icons-material";
 const Column = ({ column }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
+  const { attributes, listeners, setNodeRef, transform, transition,isDragging } =
     useSortable({ id: column._id, data: { ...column } });
 
   const dndkitColumnStyles = {
@@ -30,6 +32,8 @@ const Column = ({ column }) => {
     // transform: CSS.Transform.toString(transform),
     transform: CSS.Translate.toString(transform),
     transition,
+    height: "100%",
+    opacity:isDragging ? 0.5 : undefined
   };
   const oderedCard = mapOrder(column?.cards, column?.cardOrderIds, "_id");
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -42,11 +46,8 @@ const Column = ({ column }) => {
   };
 
   return (
-    <>
+    <div ref={setNodeRef} style={dndkitColumnStyles} {...attributes}>
       <Box
-        ref={setNodeRef}
-        style={dndkitColumnStyles}
-        {...attributes}
         {...listeners}
         sx={{
           minWidth: "300px",
@@ -163,7 +164,7 @@ const Column = ({ column }) => {
           <DragHandleIcon sx={{ cursor: "pointer", marginRight: "5px" }} />
         </Box>
       </Box>
-    </>
+    </div>
   );
 };
 
