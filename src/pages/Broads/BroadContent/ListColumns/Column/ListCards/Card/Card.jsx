@@ -10,15 +10,23 @@ import Typography from "@mui/material/Typography";
 import React from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Opacity } from "@mui/icons-material";
 const Card = ({ card }) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: card._id, data: { ...card } });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: card._id, data: { ...card } });
 
   const dndkitCardStyles = {
     // **dung transalte thay cho tranform de khong bi bien dang hinh anh (strech)https://github.com/clauderic/dnd-kit/issues/117
     // transform: CSS.Transform.toString(transform),
     transform: CSS.Translate.toString(transform),
     transition,
+    opacity: isDragging ? 0.5 : undefined,
   };
   const shouldShowCardAction = () => {
     return (
