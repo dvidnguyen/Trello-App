@@ -23,7 +23,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 const Column = ({ column }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: column._id });
+    useSortable({ id: column._id, data: { ...column } });
 
   const dndkitColumnStyles = {
     // **dung transalte thay cho tranform de khong bi bien dang hinh anh (strech)https://github.com/clauderic/dnd-kit/issues/117

@@ -1,7 +1,6 @@
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import GroupIcon from "@mui/icons-material/Group";
 import SpeakerNotesIcon from "@mui/icons-material/SpeakerNotes";
-import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { Card as MuiCard } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
@@ -9,7 +8,18 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 const Card = ({ card }) => {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: card._id, data: { ...card } });
+
+  const dndkitCardStyles = {
+    // **dung transalte thay cho tranform de khong bi bien dang hinh anh (strech)https://github.com/clauderic/dnd-kit/issues/117
+    // transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
+    transition,
+  };
   const shouldShowCardAction = () => {
     return (
       !!card?.memberIds?.length ||
@@ -20,6 +30,10 @@ const Card = ({ card }) => {
   return (
     <>
       <MuiCard
+        ref={setNodeRef}
+        style={dndkitCardStyles}
+        {...attributes}
+        {...listeners}
         sx={{
           cursor: "pointer",
           boxShadow: "0 1px 1px rgba(0,0,0,0.2)",
