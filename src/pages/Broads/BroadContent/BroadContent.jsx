@@ -14,9 +14,11 @@ import {
   DragOverlay,
   defaultDropAnimationSideEffects,
   closestCorners,
+  pointerWithin,
+  rectIntersection
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 const ACTIVE_DRAG_ITEMS_TYPE = {
   COLUMN: "ACTIVE_DRAG_ITEMS_TYPE_COLUMN",
   CARD: "ACTIVE_DRAG_ITEMS_TYPE_CARD",
@@ -147,7 +149,7 @@ const BroadContent = ({ board }) => {
     } = active;
     // overCard la 2 cach tuong tac toi card dang keo
     const { id: overCardId } = over;
-    console.log('Call Drag Over')
+    console.log("Call Drag Over");
 
     const activeColumn = findColumnByCardId(activeDraggingId);
     const overColumn = findColumnByCardId(overCardId);
@@ -227,8 +229,6 @@ const BroadContent = ({ board }) => {
           // cập nhật lại card và oderedCardId
           targetColumn.cards = dndOderedCards;
           targetColumn.cardOrderIds = dndOderedCards.map((card) => card._id);
-          console.log("targetColumn", targetColumn);
-          console.log("dndOderedCards", dndOderedCards);
           return nextColumns;
         });
       }
@@ -270,6 +270,22 @@ const BroadContent = ({ board }) => {
       },
     }),
   };
+  const collisionDetectionStategy = useCallback((arg) => {
+    if(activeDragItemType === ACTIVE_DRAG_ITEMS_TYPE.COLUMN){
+      closestCorners({...arg})
+    }
+    const pointerInterSection = pointerWithin(arg)
+    if(!pointerInterSection?.length) return 
+  });
+
+  // xử lí bug thành công bằng custom lại customCollisionDetection 
+  const customCollisionDetection = (args) => {
+  const pointerIntersections = pointerWithin(args);
+  // Nếu không hover lên bất kỳ droppable nào thì return []
+  if (!pointerIntersections || pointerIntersections.length === 0) return [];
+  // Nếu có thì xử lý tiếp theo, ví dụ closestCorners:
+  return pointerIntersections;
+};
   return (
     <>
       <DndContext
@@ -278,7 +294,7 @@ const BroadContent = ({ board }) => {
         onDragEnd={handleDragEnd}
         sensors={sensors}
         // cillision detect algorithm
-        collisionDetection={closestCorners}
+        collisionDetection={customCollisionDetection}
       >
         <Box
           sx={{
