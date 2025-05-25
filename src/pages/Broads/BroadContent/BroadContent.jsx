@@ -13,7 +13,6 @@ import {
   useSensors,
   DragOverlay,
   defaultDropAnimationSideEffects,
-  closestCorners,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
@@ -72,12 +71,12 @@ const BroadContent = ({ board }) => {
     const {
       id: activeDraggingId,
       data: { current: activeDraggingData },
-    } = active
+    } = active;
     // overCard la 2 cach tuong tac toi card dang keo
-    const { id: overCardId } = over
+    const { id: overCardId } = over;
 
-    const activeColumn = findColumnByCardId(activeDraggingId)
-    const overColumn = findColumnByCardId(overCardId)
+    const activeColumn = findColumnByCardId(activeDraggingId);
+    const overColumn = findColumnByCardId(overCardId);
     // console.log("activeColumn",activeColumn)
     // console.log("overColumn",overColumn)
     // Neu khong ton tai 1 trong 2 column return luon
@@ -86,37 +85,58 @@ const BroadContent = ({ board }) => {
     if (activeColumn._id !== overColumn._id) {
       // Tim index ma OverCard trong Column dich den (Noi co Active Card co the duoc drop )
       setOrderColumns((preColumn) => {
-        const overCardIndex = overColumn?.cards?.findIndex( (card) => card._id === overCardId)
+        const overCardIndex = overColumn?.cards?.findIndex(
+          (card) => card._id === overCardId
+        );
         //  console.log("overCardIndex",overCardIndex)
-        let newCardIndex
+        let newCardIndex;
         const isBelowOverItems =
           active.rect.current.translated &&
-          active.rect.current.translated.top > over.rect.top + over.rect.height
-        const modifier = isBelowOverItems ? 1 : 0
-        newCardIndex = overCardIndex >= 0 ? overCardIndex + modifier : overColumn?.card?.length +1
+          active.rect.current.translated.top > over.rect.top + over.rect.height;
+        const modifier = isBelowOverItems ? 1 : 0;
+        newCardIndex =
+          overCardIndex >= 0
+            ? overCardIndex + modifier
+            : overColumn?.card?.length + 1;
         // Clone mang orderedColumnState cu ra cai moi de xu li data roi return -> cap nhat lai orderedColumnState
-        const  nextColumns = cloneDeep(preColumn);
+        const nextColumns = cloneDeep(preColumn);
 
-        const  nextActiveColumn = nextColumns?.find(column => column._id === activeColumn._id)
-        const  nextOverColumn = nextColumns?.find(column => column._id === overColumn._id)
+        const nextActiveColumn = nextColumns?.find(
+          (column) => column._id === activeColumn._id
+        );
+        const nextOverColumn = nextColumns?.find(
+          (column) => column._id === overColumn._id
+        );
         // ** column past
-        if (nextActiveColumn){
+        if (nextActiveColumn) {
           // xoá card ở cái column active ( cũng có thể hiểu là column cũ đi, cái lúc mà kéo card ra column khác )
-          nextActiveColumn.cards = nextActiveColumn.cards.filter(card => card._id !== activeDraggingId)
-          // Cap nhat lai mang cardOrderIds cho chuan 
-          nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(card => card._id)
+          nextActiveColumn.cards = nextActiveColumn.cards.filter(
+            (card) => card._id !== activeDraggingId
+          );
+          // Cap nhat lai mang cardOrderIds cho chuan
+          nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(
+            (card) => card._id
+          );
         }
 
         // ** column recent
-        if(nextOverColumn){
+        if (nextOverColumn) {
           // kiem tra coi card dang keo co co overcolumn , neu co thi xoa no truocw
-          nextOverColumn.cards = nextOverColumn.cards.filter(card => card._id !== activeDraggingId)
-          // them card dang keo vao overColumn theo vi tri index moi 
-          nextOverColumn.cards = nextOverColumn.cards.toSpliced(newCardIndex,0,activeDragItemData)
-          // Cap nhat lai mang cardOrderIds cho chuan 
-          nextOverColumn.cardOrderIds = nextOverColumn.cards.map(card => card._id)
+          nextOverColumn.cards = nextOverColumn.cards.filter(
+            (card) => card._id !== activeDraggingId
+          );
+          // them card dang keo vao overColumn theo vi tri index moi
+          nextOverColumn.cards = nextOverColumn.cards.toSpliced(
+            newCardIndex,
+            0,
+            activeDragItemData
+          );
+          // Cap nhat lai mang cardOrderIds cho chuan
+          nextOverColumn.cardOrderIds = nextOverColumn.cards.map(
+            (card) => card._id
+          );
         }
-        return nextColumns
+        return nextColumns;
       });
     }
   };
@@ -156,8 +176,6 @@ const BroadContent = ({ board }) => {
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
         sensors={sensors}
-        // collision Detection algorithm 
-        collisionDetection={closestCorners}
       >
         <Box
           sx={{
