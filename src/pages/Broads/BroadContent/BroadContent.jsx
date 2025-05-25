@@ -13,6 +13,7 @@ import {
   useSensors,
   DragOverlay,
   defaultDropAnimationSideEffects,
+  closestCorners,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { useEffect, useState } from "react";
@@ -176,6 +177,8 @@ const BroadContent = ({ board }) => {
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
         sensors={sensors}
+        // cillision detect algorithm 
+        collisionDetection={closestCorners}
       >
         <Box
           sx={{
