@@ -3,7 +3,8 @@ import ListColumns from "./ListColumns/ListColumns";
 import { mapOrder } from "~/utils/sort";
 import Column from "./ListColumns/Column/Column";
 import Card from "./ListColumns/Column/ListCards/Card/Card";
-import { cloneDeep } from "lodash";
+import { cloneDeep, isEmpty } from "lodash";
+import { generatePlaceholderCard } from "../../../utils/formater";
 import {
   DndContext,
   PointerSensor,
@@ -15,7 +16,7 @@ import {
   defaultDropAnimationSideEffects,
   closestCorners,
   pointerWithin,
-  rectIntersection
+  rectIntersection,
 } from "@dnd-kit/core";
 import { arrayMove } from "@dnd-kit/sortable";
 import { useCallback, useEffect, useState } from "react";
@@ -93,6 +94,12 @@ const BroadContent = ({ board }) => {
         nextActiveColumn.cards = nextActiveColumn.cards.filter(
           (card) => card._id !== activeDraggingId
         );
+
+        // Thêm card placeholder nếu card bị rỗng : bị kéo hết card đi không còn card nào nữa sẽ thêm một cái placeholder để giữ chỗ cho column đó
+        if (isEmpty(nextActiveColumn.cards)) {
+          console.log("Card cuối cùng bị kéo đi ");
+          nextActiveColumn.cards =[generatePlaceholderCard(nextActiveColumn)]
+        }
         // Cap nhat lai mang cardOrderIds cho chuan
         nextActiveColumn.cardOrderIds = nextActiveColumn.cards.map(
           (card) => card._id
@@ -115,6 +122,10 @@ const BroadContent = ({ board }) => {
           0,
           activeDragItemData
         );
+
+        // Xoa placeholder Card đi nếu nó đang tồn tại 
+        nextOverColumn.cards = nextOverColumn?.cards.filter(card => !card.FE_PlaceholderCard)
+
         // Cap nhat lai mang cardOrderIds cho chuan
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map(
           (card) => card._id
@@ -149,7 +160,6 @@ const BroadContent = ({ board }) => {
     } = active;
     // overCard la 2 cach tuong tac toi card dang keo
     const { id: overCardId } = over;
-    console.log("Call Drag Over");
 
     const activeColumn = findColumnByCardId(activeDraggingId);
     const overColumn = findColumnByCardId(overCardId);
@@ -203,7 +213,7 @@ const BroadContent = ({ board }) => {
           activeDragItemData
         );
       }
-      //keo tha card khac column (oldColumnwhenDraggingCard)
+      //keo tha card cung column (oldColumnwhenDraggingCard)
       else {
         // vi tri column  cũ từ thằng (oldColumnwhenDraggingCard)
         const oldCardIndex = oldColumnwhenDraggingCard?.cards?.findIndex(
@@ -271,21 +281,21 @@ const BroadContent = ({ board }) => {
     }),
   };
   const collisionDetectionStategy = useCallback((arg) => {
-    if(activeDragItemType === ACTIVE_DRAG_ITEMS_TYPE.COLUMN){
-      closestCorners({...arg})
+    if (activeDragItemType === ACTIVE_DRAG_ITEMS_TYPE.COLUMN) {
+      closestCorners({ ...arg });
     }
-    const pointerInterSection = pointerWithin(arg)
-    if(!pointerInterSection?.length) return 
+    const pointerInterSection = pointerWithin(arg);
+    if (!pointerInterSection?.length) return;
   });
 
-  // xử lí bug thành công bằng custom lại customCollisionDetection 
+  // xử lí bug thành công bằng custom lại customCollisionDetection
   const customCollisionDetection = (args) => {
-  const pointerIntersections = pointerWithin(args);
-  // Nếu không hover lên bất kỳ droppable nào thì return []
-  if (!pointerIntersections || pointerIntersections.length === 0) return [];
-  // Nếu có thì xử lý tiếp theo, ví dụ closestCorners:
-  return pointerIntersections;
-};
+    const pointerIntersections = pointerWithin(args);
+    // Nếu không hover lên bất kỳ droppable nào thì return []
+    if (!pointerIntersections || pointerIntersections.length === 0) return [];
+    // Nếu có thì xử lý tiếp theo, ví dụ closestCorners:
+    return pointerIntersections;
+  };
   return (
     <>
       <DndContext
@@ -294,7 +304,6 @@ const BroadContent = ({ board }) => {
         onDragEnd={handleDragEnd}
         sensors={sensors}
         // cillision detect algorithm
-        collisionDetection={customCollisionDetection}
       >
         <Box
           sx={{

@@ -11,10 +11,10 @@ import theme from "./theme";
   href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
 />;
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+
     <CssVarsProvider theme={theme} defaultMode="light">
       <CssBaseline />
       <App />
     </CssVarsProvider>
-  </StrictMode>
+
 );
