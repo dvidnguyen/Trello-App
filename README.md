@@ -5,7 +5,6 @@
 ![DndKit](https://img.shields.io/badge/DND--Kit-%234B32C3?style=for-the-badge)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 
 > 🎯 A modern drag-and-drop Trello-style Kanban board built with React, DndKit, and Material UI. Fully functional frontend, optimized for UX & code style via ESLint.
 
