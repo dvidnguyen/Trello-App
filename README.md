@@ -24,7 +24,6 @@
 - 🎨 Beautiful UI with Material UI v5
 - ♻️ Responsive Layout for all screens
 - 🌈 Real-time visual feedback while dragging
-- 🧼 Clean, linted codebase using ESLint
 - 🧠 Organized with React functional components + hooks
 
 ---
@@ -38,7 +37,6 @@
 | **Material UI** | Modern and accessible React UI framework |
 | **ESLint**      | Linter to enforce code style             |
 | **JavaScript**  | Language powering the frontend           |
-| **Git**         | Version control                          |
 
 ---
 
