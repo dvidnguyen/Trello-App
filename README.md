@@ -10,7 +10,7 @@
 
 ---
 
-## 📸 Demo Screenshot
+## 📸 Demo Screenshotsss
 
 > ![Demo Screenshot](https://scontent.fsgn2-6.fna.fbcdn.net/v/t1.15752-9/494691145_3046976882127339_4892319132740143344_n.png?stp=dst-png_s843x403&_nc_cat=110&ccb=1-7&_nc_sid=0024fc&_nc_eui2=AeE7O2GXEAwkJDJX5M4bL14XNGpATSrL0zA0akBNKsvTMKRCsVarcHIfzjnHk_o2dGkxa_bjVxxY9732qHSVHpxy&_nc_ohc=cxalTs-ZPMcQ7kNvwE9yjx8&_nc_oc=AdkxAkV_Nji5I5PVwEdreU2GfzEOfYCdsooZfnWE29AQqxRfY_VWtDfKCFw_ceDJ_23n2MoPX6P2H8tn8r6uIIwP&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent.fsgn2-6.fna&oh=03_Q7cD2QExEhbFJbNrpP8XCaHZLjzGjbHAOm68kxdNlS0TT9HIRw&oe=685C0F49)  
 > _Drag and drop tasks between columns like a boss 🔥_
@@ -39,9 +39,10 @@
 
 ---
 
+
 ## ⚙️ Getting Started
 
-```bash
+```1bash
 # Clone repo
 git clone https://github.com/dvidnguyen/Trello-App.git
 
